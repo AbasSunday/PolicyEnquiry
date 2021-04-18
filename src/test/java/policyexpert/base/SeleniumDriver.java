@@ -21,6 +21,7 @@ public class SeleniumDriver implements WebDriver
     // VARIABLES
     // ==================================================
 
+    private String osName;
     private String MAIN_URL;
     private int EXPLICIT_WAIT;
 
@@ -58,20 +59,21 @@ public class SeleniumDriver implements WebDriver
 
     private void printTestInfo()
     {
+        osName = Utils.getOperatingSystemName();
+
         Utils.logSeparator();
         Utils.log("| URL:              | " + MAIN_URL);
         Utils.log("| Java version      | " + Utils.getJavaVersion());
-        Utils.log("| Operating system  | " + Utils.getOperatingSystemName());
+        Utils.log("| Operating system  | " + osName);
         Utils.log("| Time stamp        | " + DateUtils.getTimeStamp());
         Utils.logSeparator();
     }
 
-    private WebDriver createDriver()
+    private void createDriver()
     {
         reduceChromeDriverLogging();
-        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/resources/chromedriver");
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/resources/" + getChromeDriverFileName());
         driver = new ChromeDriver(createChromeOptions());
-        return driver;
     }
 
     /**
@@ -157,6 +159,16 @@ public class SeleniumDriver implements WebDriver
     private WebDriverWait driverWait(long timeout)
     {
         return new WebDriverWait(driver, timeout);
+    }
+
+    private String getChromeDriverFileName()
+    {
+        switch (osName)
+        {
+            case "Windows 10": return "chromedriver_windows.exe";
+            case "Mac OS X": return "chromedriver_mac";
+            default: throw new IllegalStateException("[" + osName + "] is not supported!");
+        }
     }
 
     // ==================================================

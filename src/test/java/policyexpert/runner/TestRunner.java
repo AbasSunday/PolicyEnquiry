@@ -2,7 +2,7 @@ package policyexpert.runner;
 
 import policyexpert.base.SeleniumDriver;
 import io.cucumber.junit.Cucumber;
-import io.cucumber.testng.CucumberOptions;
+import io.cucumber.junit.CucumberOptions;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
