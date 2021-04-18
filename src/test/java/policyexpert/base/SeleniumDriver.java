@@ -174,7 +174,7 @@ public class SeleniumDriver implements WebDriver
         switch (osName)
         {
             case "Windows 10": return "chromedriver_windows.exe";
-            case "Mac OS X": return "chromedriver_mac";
+            case "Mac OS X": return "chromedriver";
             default: throw new IllegalStateException("[" + osName + "] is not supported!");
         }
     }
