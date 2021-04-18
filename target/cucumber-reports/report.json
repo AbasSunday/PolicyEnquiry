@@ -3,17 +3,17 @@
     "line": 1,
     "elements": [
       {
-        "start_timestamp": "2021-04-17T23:46:57.362Z",
+        "start_timestamp": "2021-04-18T11:17:22.552Z",
         "line": 4,
-        "name": "Test",
+        "name": "New Policy Enquiry Test",
         "description": "",
-        "id": "new-policy;test",
+        "id": "new-policy;new-policy-enquiry-test",
         "type": "scenario",
         "keyword": "Scenario",
         "steps": [
           {
             "result": {
-              "duration": 1569827503,
+              "duration": 4127818265,
               "status": "passed"
             },
             "line": 5,
@@ -25,7 +25,7 @@
           },
           {
             "result": {
-              "duration": 1298953587,
+              "duration": 1426583118,
               "status": "passed"
             },
             "line": 6,

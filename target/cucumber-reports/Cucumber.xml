@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="2.878442">
-    <testcase classname="New Policy" name="Test" time="2.878442">
+<testsuite failures="0" name="cucumber.runtime.formatter.JUnitFormatter" skipped="0" tests="1" time="5.555319">
+    <testcase classname="New Policy" name="New Policy Enquiry Test" time="5.555319">
         <system-out>
             <![CDATA[Given I opened new policy enquiry page......................................passed
 When I fill about you section...............................................passed

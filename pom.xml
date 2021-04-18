@@ -41,7 +41,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>BanyardAutomation</projectName>
+                            <projectName>AbasAutomation</projectName>
                             <!-- output directory for the generated report -->
                             <outputDirectory>${project.build.directory}/cucumber-report.html</outputDirectory>
                             <!-- optional, defaults to outputDirectory if not specified -->
@@ -80,7 +80,7 @@
             <version>4.7.2</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-junit -->
+         <!--https://mvnrepository.com/artifact/io.cucumber/cucumber-junit-->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>

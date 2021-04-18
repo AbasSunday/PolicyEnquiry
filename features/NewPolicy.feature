@@ -1,7 +1,7 @@
 Feature: New Policy
 
   @Execute
-  Scenario: Test
+  Scenario: New Policy Enquiry Test
     Given I opened new policy enquiry page
     When I fill about you section
       | TITLE                  | Dr               |
