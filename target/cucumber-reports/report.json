@@ -1,0 +1,97 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2021-04-17T23:46:57.362Z",
+        "line": 4,
+        "name": "Test",
+        "description": "",
+        "id": "new-policy;test",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1569827503,
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "I opened new policy enquiry page",
+            "match": {
+              "location": "NewPolicySteps.iOpenedNewPolicyEnquiryPage()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1298953587,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I fill about you section",
+            "match": {
+              "location": "NewPolicySteps.iFillAboutYouSection(DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "TITLE",
+                  "Dr"
+                ]
+              },
+              {
+                "cells": [
+                  "FIRST NAME",
+                  "Abas"
+                ]
+              },
+              {
+                "cells": [
+                  "LAST NAME",
+                  "Sunday"
+                ]
+              },
+              {
+                "cells": [
+                  "DATE OF BIRTH",
+                  "10/10/1958"
+                ]
+              },
+              {
+                "cells": [
+                  "MARITAL STATUS",
+                  "Married"
+                ]
+              },
+              {
+                "cells": [
+                  "OCCUPATION",
+                  "Computer Analyst"
+                ]
+              },
+              {
+                "cells": [
+                  "HAS ANOTHER OCCUPATION",
+                  "Yes"
+                ]
+              }
+            ],
+            "keyword": "When "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@Execute"
+          }
+        ]
+      }
+    ],
+    "name": "New Policy",
+    "description": "",
+    "id": "new-policy",
+    "keyword": "Feature",
+    "uri": "file:features/NewPolicy.feature",
+    "tags": []
+  }
+]
