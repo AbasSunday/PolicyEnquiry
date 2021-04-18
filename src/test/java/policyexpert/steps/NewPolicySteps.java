@@ -1,12 +1,14 @@
 package policyexpert.steps;
 
-import policyexpert.base.SeleniumDriver;
-import policyexpert.elements.AnotherOccupancyQuestion;
-import policyexpert.elements.DateOfBirthQuestion;
-import policyexpert.elements.Question;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import policyexpert.base.SeleniumDriver;
+import policyexpert.elements.BaseElement;
+import policyexpert.elements.questions.AnotherOccupancyQuestion;
+import policyexpert.elements.section.AboutYourselfSection;
+import policyexpert.utils.AssertUtils;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -24,7 +26,7 @@ public class NewPolicySteps
     // ==================================================
 
     @Given("I opened new policy enquiry page")
-            public void iOpenedNewPolicyEnquiryPage()
+    public void iOpenedNewPolicyEnquiryPage()
     {
         driver.openWebsite();
     }
@@ -32,6 +34,41 @@ public class NewPolicySteps
 
     @When("I fill about you section")
     public void iFillAboutYouSection(DataTable table)
+    {
+        fillAboutYourSelfSection(table);
+    }
+
+    @When("I say that I {string} another occupation")
+    public void iSayThatI(String value)
+    {
+        AssertUtils.assertPossibilities(value, "Have", "Don't have");
+        boolean hasOtherOccupancy = value.equals("Have");
+        AnotherOccupancyQuestion.Answer answer = hasOtherOccupancy ? AnotherOccupancyQuestion.Answer.YES : AnotherOccupancyQuestion.Answer.NO;
+
+        AboutYourselfSection aboutYourselfSection = new AboutYourselfSection();
+        aboutYourselfSection.getAnotherOccupationQuestion().answerQuestion(answer, "Account Director");
+    }
+
+    @Then("Another occupation input should be {string}")
+    public void anotherOccupationInputShouldBe(String expectedState)
+    {
+        AssertUtils.assertPossibilities(expectedState, "Present", "Not Present");
+        boolean expectedPresent = expectedState.equals("Present");
+
+        AboutYourselfSection aboutYourselfSection = new AboutYourselfSection();
+
+        // get input to be tested
+        BaseElement anotherOccupancyNameInput = aboutYourselfSection.getAnotherOccupationQuestion().findAnotherOccupancyNameQuestion(false);
+
+        // assert element state
+        AssertUtils.assertElementPresence(expectedPresent, anotherOccupancyNameInput);
+    }
+
+    // ==================================================
+    // CLASS LOGIC
+    // ==================================================
+
+    private void fillAboutYourSelfSection(DataTable table)
     {
         // load answers from table
         List<List<String>> data = table.asLists(String.class);
@@ -43,36 +80,21 @@ public class NewPolicySteps
         String maritalStatus = data.get(4).get(1);
         String occupation = data.get(5).get(1);
         String hasAnotherOccupation = data.get(6).get(1);
+        String anotherOccupationName = data.get(7).get(1);
+        String phoneNumber = data.get(8).get(1);
+        String emailAddress = data.get(9).get(1);
 
-        // get question elements
-        Question titleQuestion = new Question("Title");
-        titleQuestion.findElement();
-
-        Question firstNameQuestion = new Question("First name");
-        firstNameQuestion.findElement();
-
-        Question lastNameQuestion = new Question("Last name");
-        lastNameQuestion.findElement();
-
-        DateOfBirthQuestion dateOfBirthQuestion = new DateOfBirthQuestion("What is your date of birth?");
-        dateOfBirthQuestion.findElement();
-
-        Question maritalStatusQuestion = new Question("What is your marital status?");
-        maritalStatusQuestion.findElement();
-
-        Question occupationQuestion = new Question("What is your occupation?");
-        occupationQuestion.findElement();
-
-        AnotherOccupancyQuestion anotherOccupationQuestion = new AnotherOccupancyQuestion("Do you have another occupation as well?");
-        anotherOccupationQuestion.findElement();
+        AboutYourselfSection aboutYourselfSection = new AboutYourselfSection();
 
         // answer questions
-        titleQuestion.getSelectDropdown().selectByVisibleText(title);
-        firstNameQuestion.getTextInputField().sendKeys(firstName);
-        lastNameQuestion.getTextInputField().sendKeys(lastName);
-        dateOfBirthQuestion.setDayOfBirth(dateOfBirth);
-        maritalStatusQuestion.getSelectDropdown().selectByVisibleText(maritalStatus);
-        occupationQuestion.getTextInputField().sendKeys(occupation);
-        anotherOccupationQuestion.answerQuestion(AnotherOccupancyQuestion.Answer.findByValue(hasAnotherOccupation));
+        aboutYourselfSection.getTitleQuestion().getSelectDropdown().selectByVisibleText(title);
+        aboutYourselfSection.getFirstNameQuestion().getTextInputField().sendKeys(firstName);
+        aboutYourselfSection.getLastNameQuestion().getTextInputField().sendKeys(lastName);
+        aboutYourselfSection.getDateOfBirthQuestion().setDayOfBirth(dateOfBirth);
+        aboutYourselfSection.getMaritalStatusQuestion().getSelectDropdown().selectByVisibleText(maritalStatus);
+        aboutYourselfSection.getOccupationQuestion().getTextInputField().sendKeys(occupation);
+        aboutYourselfSection.getAnotherOccupationQuestion().answerQuestion(AnotherOccupancyQuestion.Answer.findByValue(hasAnotherOccupation), anotherOccupationName);
+        aboutYourselfSection.getMainPhoneNumberQuestion().getTextInputField().sendKeys(phoneNumber);
+        aboutYourselfSection.getEmailAddressQuestion().getTextInputField().sendKeys(emailAddress);
     }
 }

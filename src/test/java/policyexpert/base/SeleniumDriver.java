@@ -1,6 +1,7 @@
 package policyexpert.base;
 
 import policyexpert.utils.DateUtils;
+import policyexpert.utils.ElementState;
 import policyexpert.utils.Utils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -147,13 +148,20 @@ public class SeleniumDriver implements WebDriver
         return Integer.parseInt(properties.getProperty(property));
     }
 
-    /**
-     * Finds web element with safety buffer, allowing website to load content
-     * @param xpath of the web element
-     */
-    public WebElement getWebElement(String xpath)
+    public WebElement getWebElement(String xpath, ElementState elementState)
     {
-        return driverWait(EXPLICIT_WAIT).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        switch (elementState)
+        {
+            case IGNORE:
+                return driver.findElement(By.xpath(xpath));
+            case PRESENT:
+                return driverWait(EXPLICIT_WAIT).until(ExpectedConditions.presenceOfElementLocated(By.xpath(xpath)));
+            case DISPLAYED:
+                return driverWait(EXPLICIT_WAIT).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            case CLICKABLE:
+                return driverWait(EXPLICIT_WAIT).until(ExpectedConditions.elementToBeClickable(By.xpath(xpath)));
+        }
+        return null;
     }
 
     private WebDriverWait driverWait(long timeout)
