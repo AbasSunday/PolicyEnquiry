@@ -25,6 +25,6 @@ public class TestRunner extends AbstractTestNGCucumberTests
     @AfterClass
     public static void tearDown()
     {
-
+       SeleniumDriver.getInstance().close();
     }
 }
