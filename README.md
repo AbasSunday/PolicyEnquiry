@@ -4,7 +4,7 @@
 Make sure you have [Java](https://www.java.com/en/) and [Maven](http://maven.apache.org) installed on your system, if not follow the vendor instructions for installing them on your operating system.
 In order to run tests in CHROME browser make sure you have chromedriver and it is accessibile
 in Linux OS/iOS family it would be in /usr/bin/ for example
-in Windows OS family you should export your chromedriver localization to system path
+in Windows OS family you should export your chromedriver localization to system path and for **window-user chrome will have an .exe extension while with mac iOs the chrome will not have an exe extention**
 
 #  Running Tests
 
